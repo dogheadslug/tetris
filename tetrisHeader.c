@@ -38,8 +38,9 @@ void OnPaint(HDC hDc) {
 void ShowScore(HDC hMemDC) {
 	Rectangle(hMemDC, 300, 0, 500, 600);
 	_itoa_s(g_nScore, strScore, 10*sizeof(char), 10);
-	TextOut(hMemDC, 380, 70, "SCORE:", strlen("score:"));
-	TextOut(hMemDC, 400, 100, strScore, strlen(strScore));
+	TextOut(hMemDC, 330, 40, "press ENTER to start", strlen("press ENTER to start"));
+	TextOut(hMemDC, 370, 70, "SCORE:", strlen("score:"));
+	TextOut(hMemDC, 395, 100, strScore, strlen(strScore));
 
 }
 
