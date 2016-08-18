@@ -182,7 +182,7 @@ void CopySquareToBG() {
 }
 
 void OnReturn(HWND hWnd) {
-	SetTimer(hWnd, DEF_TIMER1, 500, NULL);
+	SetTimer(hWnd, DEF_TIMER1, 250, NULL);
 
 }
 
@@ -242,6 +242,8 @@ int GameOver(HWND hWnd) {
 				return 1;
 				break;
 			case IDCANCEL:
+				KillTimer(hWnd, DEF_TIMER1);
+				PostQuitMessage(0);//WM_CLOSE, WM_DESTROY, WE_QUIT
 				return 0;
 				break;
 			}
