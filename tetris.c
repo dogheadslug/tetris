@@ -182,7 +182,7 @@ void CopySquareToBG() {
 }
 
 void OnReturn(HWND hWnd) {
-	SetTimer(hWnd, DEF_TIMER1, 250, NULL);
+	SetTimer(hWnd, DEF_TIMER1, 500, NULL);
 
 }
 
@@ -525,7 +525,7 @@ void RotateStick() {
 
 int CanStickRotate() {
 	int i, j = 0;
-	for (i = 1; i < 4; i++) {
+	for (i = 1; i < 4; i++) {//left and right boarder
 		if (2 == g_arrBG[g_nRow][g_nCol + i] || g_nCol + i > 9) {
 			break;
 		}
@@ -538,6 +538,8 @@ int CanStickRotate() {
 	if (i - 1 + j - 1 < 3) {
 		return 0;
 	}
+
+	if (g_nRow < 1)return 0;//the stick can not rotate when at the very top of the game area
 	return 1;
 }
 
