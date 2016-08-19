@@ -1,5 +1,6 @@
 # tetris 
 20160817
+
 a game recently made, following the tutorial here at
 http://www.bilibili.com/video/av4075526/
 
@@ -11,4 +12,5 @@ added "press ENTER to start"
 fixed the bug that non-full row get claered if a full row appeared upon it.
 
 20160818
+
 fixed the bug caused by rotating stick shaped item at the top of the game space.
