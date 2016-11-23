@@ -20,3 +20,10 @@ fixed the bug caused by rotating stick shaped item at the top of the game space.
 20161111
 
 uploded the exe file. If your computer does not have visual studio installed, you may need to get some dll files in order to run this game.
+
+
+20161122
+
+newrest update at branch 161122
+
+https://drive.google.com/open?id=0Bxp1F7GrtyUCamxtNDBGWHB5aFk game download link.
