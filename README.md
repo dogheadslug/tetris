@@ -23,5 +23,8 @@ uploded the exe file. If your computer does not have visual studio installed, yo
 
 20161122
 
-added WASD control
+added WASD control 
+
 added background music (Tetris theme by London Philharmonic Orchestra) toggled by press M
+
+due to the size limit of upload files, I'm not able to upload exe file or Tetris.wav (which is the resource of BGM)
