@@ -28,3 +28,7 @@ added WASD control
 added background music (Tetris theme by London Philharmonic Orchestra) toggled by press M
 
 due to the size limit of upload files, I'm not able to upload exe file or Tetris.wav (which is the resource of BGM)
+
+20161212
+
+fixed the issue: when the game is not started, pressing down button will move the item downwards without starting the game.
