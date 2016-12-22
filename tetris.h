@@ -49,9 +49,11 @@ void ShowSquare2(HDC hMemDC);
 void Rotate();
 void RotateStick();
 
-void RemoveRow();
+void RemoveRow(HWND hWnd);
 
 void ShowScore(HDC hMemDC);
+void Restart(HWND hWnd);
 
-
+void ToggleBGM(HWND hWnd);
+void gameOverClose(HWND hWnd);
 #endif

@@ -1,7 +1,10 @@
-
 #include <Windows.h>
+#include <mmsystem.h>
 #include "tetris.h"
+#include "resource.h"
 #include <stdlib.h>
+#pragma comment (lib,"Winmm.lib")
+
 char strScore[10] = { 0 };
 char g_arrBG[20][10] = { 0 };//use char to save space
 char g_arrSquare[2][4] = { 0 };
@@ -9,6 +12,9 @@ int g_nSquareID = -1;
 int g_nRow = -1;
 int g_nCol = -1;
 int g_nScore = 0;
+int bgm = 0;
+int oops = 0;
+int newAlert = 0;
 
 
 void OnPaint(HDC hDc) {
@@ -18,7 +24,6 @@ void OnPaint(HDC hDc) {
 
 	//creating bitmap
 	HBITMAP hBitmapBG = CreateCompatibleBitmap(hDc, 500, 600);//background
-
 															  //connecting them
 	SelectObject(hMemDC, hBitmapBG);
 
@@ -30,7 +35,6 @@ void OnPaint(HDC hDc) {
 	//passing
 	BitBlt(hDc, 0, 0, 500, 600, hMemDC, 0, 0, SRCCOPY);
 
-
 	DeleteObject(hBitmapBG);
 	DeleteDC(hMemDC);
 }
@@ -41,7 +45,8 @@ void ShowScore(HDC hMemDC) {
 	TextOut(hMemDC, 330, 40, "press ENTER to start", strlen("press ENTER to start"));
 	TextOut(hMemDC, 370, 70, "SCORE:", strlen("score:"));
 	TextOut(hMemDC, 395, 100, strScore, strlen(strScore));
-
+	TextOut(hMemDC, 320, 130, "press M to toggle music", strlen("press M to toggle music"));
+	//TextOut(hMemDC, 330, 130, "press R to restart", strlen("press R to restart"));
 }
 
 void OnCreate() {
@@ -74,8 +79,6 @@ void PaintSquare(HDC hMemDC) {
 }
 
 int CreateRandomSquare() {
-
-
 	int nIndex = rand() % 7;
 	//int nIndex = 5;
 	switch (nIndex) {
@@ -182,8 +185,7 @@ void CopySquareToBG() {
 }
 
 void OnReturn(HWND hWnd) {
-	SetTimer(hWnd, DEF_TIMER1, 500, NULL);
-
+	SetTimer(hWnd, DEF_TIMER1, 500, NULL);//speed of the game
 }
 
 void SquareFall() {
@@ -207,13 +209,15 @@ void OnTimer(HWND hWnd) {
 	else {
 		//alter the value of square if the item can not fall
 		ChangeSqrVal();
-		RemoveRow();
+		RemoveRow(hWnd);
+		
 		if (0 == GameOver(hWnd)) {
 			KillTimer(hWnd, DEF_TIMER1);
 			//return 0;
 		}
 		CreateRandomSquare();
 		CopySquareToBG();
+		gameOverClose(hWnd);
 	}
 
 	OnPaint(hDc);
@@ -225,20 +229,28 @@ int GameOver(HWND hWnd) {
 	int i = 0;
 	for (i = 0; i < 10; i++) {
 		if (g_arrBG[0][i] == 2) {
+			int gameOverSound = rand() % 3;
+			switch (gameOverSound) {
+			case 0:
+                PlaySound(MAKEINTRESOURCE(IDR_WAVE6), NULL, SND_RESOURCE | SND_ASYNC);//tsp
+				break;
+			case 1:
+				PlaySound(MAKEINTRESOURCE(IDR_WAVE7), NULL, SND_RESOURCE | SND_ASYNC);//angry
+				break;
+			case 2:
+				PlaySound(MAKEINTRESOURCE(IDR_WAVE8), NULL, SND_RESOURCE | SND_ASYNC);//media improve
+				break;
+			}
+            
 			//game over, pop up a window
 			int GameoverInfo = MessageBox(hWnd, "gameover", "Message", MB_RETRYCANCEL);
+			
 			//return 0;
 			//retry function
 			switch (GameoverInfo) {
 			case IDRETRY:
-				OnReturn(hWnd);//restart
-				g_nScore = 0;
-				//clear the game area
-				for (int i = 0; i < 20; i++) {
-					for (int j = 0; j < 10; j++) {
-						g_arrBG[i][j] = 0;
-					}
-				}
+				Restart(hWnd);//restart
+				
 				return 1;
 				break;
 			case IDCANCEL:
@@ -543,10 +555,12 @@ int CanStickRotate() {
 	return 1;
 }
 
-void RemoveRow() {
+void RemoveRow(HWND hWnd) {//add a int count here
+	//1:excited 2:one good(not captured yet) 3:wls 4:big news
 	int nTempi = 0;
 	int i = 0;
 	int j = 0;
+	int rowCount = 0;
 	for (i = 19; i >= 0; i--) {
 		int nSum = 0;
 		for (j = 0; j < 10; j++) {
@@ -559,7 +573,91 @@ void RemoveRow() {
 				}
 			}
 			g_nScore++;
+			rowCount++;
 			i = 20;
+		}
+	}
+	switch (rowCount) {
+	case 1:
+		if (bgm == 1){
+			ToggleBGM(hWnd);
+			PlaySound(MAKEINTRESOURCE(IDR_WAVE3), NULL, SND_RESOURCE | SND_ASYNC);
+			ToggleBGM(hWnd);
+		}
+		else PlaySound(MAKEINTRESOURCE(IDR_WAVE3), NULL, SND_RESOURCE | SND_ASYNC);//hou a 
+		break;
+	case 2:
+		if (bgm == 1){
+			ToggleBGM(hWnd);
+			PlaySound(MAKEINTRESOURCE(IDR_WAVE2), NULL, SND_RESOURCE | SND_ASYNC);
+			ToggleBGM(hWnd);
+		}
+		else PlaySound(MAKEINTRESOURCE(IDR_WAVE2), NULL, SND_RESOURCE | SND_ASYNC);//excited
+		break;
+	case 3:
+		if (bgm == 1) {
+			ToggleBGM(hWnd);
+			PlaySound(MAKEINTRESOURCE(IDR_WAVE4), NULL, SND_RESOURCE | SND_ASYNC);
+			ToggleBGM(hWnd);
+		}
+		else PlaySound(MAKEINTRESOURCE(IDR_WAVE4), NULL, SND_RESOURCE | SND_ASYNC);//wallas
+		break;
+	case 4:
+		if (bgm == 1) {
+			ToggleBGM(hWnd);
+			PlaySound(MAKEINTRESOURCE(IDR_WAVE5), NULL, SND_RESOURCE | SND_ASYNC);
+			ToggleBGM(hWnd);
+		}
+		else PlaySound(MAKEINTRESOURCE(IDR_WAVE5), NULL, SND_RESOURCE | SND_ASYNC);//bignews
+		break;
+	}
+
+
+}
+
+void Restart(HWND hWnd) {
+	
+	g_nScore = 0;
+	//clear the game area
+	for (int i = 0; i < 20; i++) {
+		for (int j = 0; j < 10; j++) {
+			g_arrBG[i][j] = 0;
+		}
+		
+	}
+	//int GameoverInfo = MessageBox(hWnd, "retry", "retry", MB_OK);
+
+	OnReturn(hWnd);//restart
+	return;
+	//return 1;
+}
+
+void ToggleBGM(HWND hWnd) {
+	bgm = !bgm;
+	if (bgm == 1) PlaySound(MAKEINTRESOURCE(IDR_WAVE1), NULL, SND_RESOURCE | SND_LOOP | SND_ASYNC);
+	else PlaySound(NULL, NULL, SND_ASYNC);
+}
+
+void gameOverClose(HWND hWnd) {
+	
+	int temp = 0;
+	if (oops == 0) {
+		for (int k = 0; k < 10; k++) {
+			if (2 == g_arrBG[5][k]) temp = 1;
+		}
+		oops = temp;
+	}
+	if (oops == 1 && newAlert == 0) {
+		PlaySound(MAKEINTRESOURCE(IDR_WAVE9), NULL, SND_RESOURCE | SND_ASYNC);//elder's feeling
+		newAlert = 1;
+	}
+	if (oops == 1 && newAlert == 1) {
+		int rowClear = 1;
+		for (int i = 0; i < 10; i++) {
+			if (2 == g_arrBG[12][i]) rowClear = 0;
+		}
+		if (rowClear == 1) {
+			newAlert = 0;
 		}
 	}
 }
