@@ -27,3 +27,7 @@ uploded the exe file. If your computer does not have visual studio installed, yo
 newrest update at branch 161122
 
 https://drive.google.com/open?id=0Bxp1F7GrtyUCamxtNDBGWHB5aFk game download link.
+
+20161223
+
+please see other branches for updates
