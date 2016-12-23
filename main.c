@@ -32,7 +32,7 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPreInstance, LPTSTR LPCmdL
     }
 
     //creating a window
-    hWnd = CreateWindowEx(WS_EX_TOPMOST, "tetris", "tetris 俄罗斯方块", WS_OVERLAPPEDWINDOW, 100, 100, 500, 650, NULL, NULL, hInstance, NULL);
+    hWnd = CreateWindowEx(WS_EX_TOPMOST, "tetris", "make a big news!  弄个大新闻！", WS_OVERLAPPEDWINDOW, 100, 100, 500, 650, NULL, NULL, hInstance, NULL);
     if (NULL == hWnd) {
         return 0;
     }
@@ -75,15 +75,35 @@ LRESULT CALLBACK P_function(HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam) 
             break;
         case VK_LEFT:
 		case 0x41://A key
-            OnLeft(hWnd);
+			if (gameStart == false) {
+				gameStart = true;
+				OnReturn(hWnd);
+			}
+			else{
+				OnLeft(hWnd);
+			}
             break;
         case VK_RIGHT:
 		case 0x44://D key
-            OnRight(hWnd);
+			if (gameStart == false) {
+				gameStart = true;
+				OnReturn(hWnd);
+			}
+			else
+			{
+				OnRight(hWnd);
+			}
             break;
         case VK_UP://changing facing
 		case 0x57://W key
-            OnChange(hWnd);
+			if (gameStart == false) {
+				gameStart = true;
+				OnReturn(hWnd);
+			}
+			else {
+				OnChange(hWnd);
+			}
+            
             break;
         case VK_DOWN:
 		case 0x53://S key

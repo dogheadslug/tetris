@@ -1,3 +1,14 @@
+/************************************************/
+/*timer: we got settimer and killtimer, is there*/
+/*a pausetimer which can enable the pause func??*/
+/*do the research when the internet is avaliable*/
+/************************************************/
+//msdn
+//char comparison, the problem caused by  2==xxx
+//should we always put the "content" of char before the char item?
+
+
+//desktop icon of the game
 #include <Windows.h>
 #include <mmsystem.h>
 #include "tetris.h"
@@ -40,12 +51,13 @@ void OnPaint(HDC hDc) {
 }
 
 void ShowScore(HDC hMemDC) {
-	Rectangle(hMemDC, 300, 0, 500, 600);
+	Rectangle(hMemDC, 300, 0, 500,600);
 	_itoa_s(g_nScore, strScore, 10 * sizeof(char), 10);
 	TextOut(hMemDC, 330, 40, "press ENTER to start", strlen("press ENTER to start"));
-	TextOut(hMemDC, 370, 70, "SCORE:", strlen("score:"));
-	TextOut(hMemDC, 395, 100, strScore, strlen(strScore));
-	TextOut(hMemDC, 320, 130, "press M to toggle music", strlen("press M to toggle music"));
+	TextOut(hMemDC, 315, 70, "你已经为长者续了     秒:", strlen("你已经为长者续了     秒"));
+	TextOut(hMemDC, 435, 70, strScore, strlen(strScore));
+	TextOut(hMemDC, 301, 100, "一次消除四行来弄个大新闻", strlen("一次消除四行来弄个大新闻"));
+	//TextOut(hMemDC, 320, 130, "press M to toggle music", strlen("press M to toggle music"));
 	//TextOut(hMemDC, 330, 130, "press R to restart", strlen("press R to restart"));
 }
 
@@ -556,7 +568,7 @@ int CanStickRotate() {
 }
 
 void RemoveRow(HWND hWnd) {//add a int count here
-	//1:excited 2:one good(not captured yet) 3:wls 4:big news
+	//1:hou 2:excited 3:wls 4:big news
 	int nTempi = 0;
 	int i = 0;
 	int j = 0;
@@ -634,18 +646,16 @@ void Restart(HWND hWnd) {
 
 void ToggleBGM(HWND hWnd) {
 	bgm = !bgm;
-	if (bgm == 1) PlaySound(MAKEINTRESOURCE(IDR_WAVE1), NULL, SND_RESOURCE | SND_LOOP | SND_ASYNC);
-	else PlaySound(NULL, NULL, SND_ASYNC);
+	//if (bgm == 1) PlaySound(MAKEINTRESOURCE(IDR_WAVE1), NULL, SND_RESOURCE | SND_LOOP | SND_ASYNC);
+	//else PlaySound(NULL, NULL, SND_ASYNC);
 }
 
 void gameOverClose(HWND hWnd) {
 	
-	int temp = 0;
 	if (oops == 0) {
 		for (int k = 0; k < 10; k++) {
-			if (2 == g_arrBG[5][k]) temp = 1;
+			if (2 == g_arrBG[5][k]) oops = 1;
 		}
-		oops = temp;
 	}
 	if (oops == 1 && newAlert == 0) {
 		PlaySound(MAKEINTRESOURCE(IDR_WAVE9), NULL, SND_RESOURCE | SND_ASYNC);//elder's feeling
@@ -654,10 +664,11 @@ void gameOverClose(HWND hWnd) {
 	if (oops == 1 && newAlert == 1) {
 		int rowClear = 1;
 		for (int i = 0; i < 10; i++) {
-			if (2 == g_arrBG[12][i]) rowClear = 0;
+			if (2 == g_arrBG[5][i]) rowClear = 0;
 		}
 		if (rowClear == 1) {
 			newAlert = 0;
+			oops = 0;
 		}
 	}
 }
