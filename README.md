@@ -32,3 +32,7 @@ https://drive.google.com/open?id=0Bxp1F7GrtyUCamxtNDBGWHB5aFk game download link
 弄个大新闻！make a big news. Added new sounds in game, removed background music.
 download link:
 https://drive.google.com/file/d/0Bxp1F7GrtyUCV0twVG1UdlVFSTQ/view?usp=sharing
+
+20161223
+latest version avaliable:https://drive.google.com/file/d/0Bxp1F7GrtyUCaDhqVk53Rk1IaTA/view?usp=sharing
+最新版本。（之后可能就只有外观修改）
