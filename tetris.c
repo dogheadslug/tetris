@@ -9,6 +9,8 @@
 
 
 //desktop icon of the game
+//´óÁ¦³öÆæ¼£Í¼
+//other icons 
 #include <Windows.h>
 #include <mmsystem.h>
 #include "tetris.h"
@@ -98,60 +100,60 @@ int CreateRandomSquare() {
 	case 0://z
 		g_arrSquare[0][0] = 1;
 		g_arrSquare[0][1] = 1;
-		g_arrSquare[0][2] = 0;
-		g_arrSquare[0][3] = 0;
-		g_arrSquare[1][0] = 0;
+		//g_arrSquare[0][2] = 0;
+		//g_arrSquare[0][3] = 0;
+		//g_arrSquare[1][0] = 0;
 		g_arrSquare[1][1] = 1;
 		g_arrSquare[1][2] = 1;
-		g_arrSquare[1][3] = 0;
+		//g_arrSquare[1][3] = 0;
 		g_nRow = 0;
 		g_nCol = 3;
 		break;
 	case 1://z
-		g_arrSquare[0][0] = 0;
+		//g_arrSquare[0][0] = 0;
 		g_arrSquare[0][1] = 1;
 		g_arrSquare[0][2] = 1;
-		g_arrSquare[0][3] = 0;
+		//g_arrSquare[0][3] = 0;
 		g_arrSquare[1][0] = 1;
 		g_arrSquare[1][1] = 1;
-		g_arrSquare[1][2] = 0;
-		g_arrSquare[1][3] = 0;
+		//g_arrSquare[1][2] = 0;
+		//g_arrSquare[1][3] = 0;
 		g_nRow = 0;
 		g_nCol = 3;
 		break;
 	case 2://L
 		g_arrSquare[0][0] = 1;
-		g_arrSquare[0][1] = 0;
-		g_arrSquare[0][2] = 0;
-		g_arrSquare[0][3] = 0;
+		//g_arrSquare[0][1] = 0;
+		//g_arrSquare[0][2] = 0;
+		//g_arrSquare[0][3] = 0;
 		g_arrSquare[1][0] = 1;
 		g_arrSquare[1][1] = 1;
 		g_arrSquare[1][2] = 1;
-		g_arrSquare[1][3] = 0;
+		//g_arrSquare[1][3] = 0;
 		g_nRow = 0;
 		g_nCol = 3;
 		break;
 	case 3://L
-		g_arrSquare[0][0] = 0;
-		g_arrSquare[0][1] = 0;
+		//g_arrSquare[0][0] = 0;
+		//g_arrSquare[0][1] = 0;
 		g_arrSquare[0][2] = 1;
-		g_arrSquare[0][3] = 0;
+		//g_arrSquare[0][3] = 0;
 		g_arrSquare[1][0] = 1;
 		g_arrSquare[1][1] = 1;
 		g_arrSquare[1][2] = 1;
-		g_arrSquare[1][3] = 0;
+		//g_arrSquare[1][3] = 0;
 		g_nRow = 0;
 		g_nCol = 3;
 		break;
 	case 4://.|.
-		g_arrSquare[0][0] = 0;
+		//g_arrSquare[0][0] = 0;
 		g_arrSquare[0][1] = 1;
-		g_arrSquare[0][2] = 0;
-		g_arrSquare[0][3] = 0;
+		//g_arrSquare[0][2] = 0;
+		//g_arrSquare[0][3] = 0;
 		g_arrSquare[1][0] = 1;
 		g_arrSquare[1][1] = 1;
 		g_arrSquare[1][2] = 1;
-		g_arrSquare[1][3] = 0;
+		//g_arrSquare[1][3] = 0;
 		g_nRow = 0;
 		g_nCol = 3;
 		break;
@@ -160,22 +162,22 @@ int CreateRandomSquare() {
 		g_arrSquare[0][1] = 1;
 		g_arrSquare[0][2] = 1;
 		g_arrSquare[0][3] = 1;
-		g_arrSquare[1][0] = 0;
-		g_arrSquare[1][1] = 0;
-		g_arrSquare[1][2] = 0;
-		g_arrSquare[1][3] = 0;
+		//g_arrSquare[1][0] = 0;
+		//g_arrSquare[1][1] = 0;
+		//g_arrSquare[1][2] = 0;
+		//g_arrSquare[1][3] = 0;
 		g_nRow = 0;
 		g_nCol = 4;
 		break;
 	case 6://[]
-		g_arrSquare[0][0] = 0;
+		//g_arrSquare[0][0] = 0;
 		g_arrSquare[0][1] = 1;
 		g_arrSquare[0][2] = 1;
-		g_arrSquare[0][3] = 0;
-		g_arrSquare[1][0] = 0;
+		//g_arrSquare[0][3] = 0;
+		//g_arrSquare[1][0] = 0;
 		g_arrSquare[1][1] = 1;
 		g_arrSquare[1][2] = 1;
-		g_arrSquare[1][3] = 0;
+		//g_arrSquare[1][3] = 0;
 		g_nRow = 0;
 		g_nCol = 4;
 		break;
