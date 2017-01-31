@@ -36,3 +36,6 @@ https://drive.google.com/file/d/0Bxp1F7GrtyUCV0twVG1UdlVFSTQ/view?usp=sharing
 20161223
 latest version avaliable:https://drive.google.com/file/d/0Bxp1F7GrtyUCaDhqVk53Rk1IaTA/view?usp=sharing
 最新版本。（之后可能就只有外观修改）
+
+20170131
+fixed a bug caused by drawing new items way wipe the existing blocks. I have to say the original tutorial has some small problems.
