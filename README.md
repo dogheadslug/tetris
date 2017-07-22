@@ -1,5 +1,12 @@
 # tetris 
 
+20170720
+
+after updating my visual studio to VS2017, this project is broken.
+
+
+
+
 20160817
 
 a game recently made, following the tutorial here at
